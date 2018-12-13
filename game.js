@@ -36,14 +36,17 @@ function shuffle(array) {
 shuffle(fullDeck);
 
 
- /* Gameboard kreieren */
+ /* crate Gameboard */
 
  function startGame() {
     const  gameboard = document.querySelector('#memory_gameboard');
     let newHtml = ''
 
     for(const cardName of fullDeck) {
-         newHtml += `<div class="memory_card"><img src="images/${cardName}.jpg"/></div>`
+         newHtml += `<div class="memory_card">
+         <img class="memory_card_front" src="images/${cardName}.jpg"/>
+         <img class="memory_card_back" src="images/memory_back.png"/>
+         </div>`
     }
      gameboard.innerHTML = newHtml;
  }
@@ -51,25 +54,42 @@ shuffle(fullDeck);
  startGame()
 
 
+/* set up the event listener for a card. If a card is clicked: */
+const eventAllCards = document.querySelectorAll('.memory_card');
+for(memory_card of eventAllCards) {
+    memory_card.addEventListener('click', function(event) {
+        const flippedCards = document.querySelectorAll('.flipped');
+        const count = flippedCards.length;
+        if (count < 2) {
+        this.classList.add('flipped');
+        }
+        if (count == 1) {
+            const firstCard = flippedCards[0];
+            const firstCardFront = firstCard.querySelector('.memory_card_front');
+            const secondCardFront = this.querySelector('.memory_card_front');
+            console.log("pups", firstCardFront.src, secondCardFront.src);
+            if (firstCardFront.src == secondCardFront.src) {
+                firstCard.classList.add('matched');
+                this.classList.add('matched');
+                firstCard.classList.remove('flipped');
+                this.classList.remove('flipped');
+            }
 
-/*
- * set up the event listener for a card. If a card is clicked: */
+            else { 
+                setTimeout(()=>{
+                    firstCard.classList.remove('flipped');
+                    this.classList.remove('flipped');
+                },1500)
+                
+            }
 
 
- /* const cards = document.querySelectorAll('.memory_card');
+        }
+    })
+}
 
- for (memory_card of cards) {
-     memory_card.addEventListener('click', () => {
-         console.log("You have clicked me!");
-     })
- } */
 
  
-
-
-/*  gameboard.addEventListener('click', (event) => {
-     }) */
-
  /*- display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match

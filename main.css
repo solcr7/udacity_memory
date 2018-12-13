@@ -51,21 +51,54 @@ h1 {
     margin: 0 0 3em;
 }
 
-.memory_card img {
+.memory_card {
+    position: relative;
+    transition: all 0.25s ease-in-out;
     height: 125px;
     width: 125px;
-    background: #2e3d49;
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-#memory_gameboard .memory_card.open {
+.memory_card_front,
+.memory_card_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    backface-visibility: hidden;
+    transition: all 0.25s ease-in-out;
+}
+
+.memory_card_front {
+    transform: rotateY(180deg);
+}
+
+.memory_card.flipped .memory_card_front,  
+.memory_card.matched .memory_card_front {
+    transform: rotateY(360deg);
+  
+}
+
+.memory_card.flipped .memory_card_back, 
+.memory_card.matched .memory_card_back {
+    transform: rotateY(180deg);
+}
+
+.memory_card.matched {
+    
+}
+
+.memory_card_back {
+    
+}
+.memory_card:hover {
+    transform: scale(1.1);
+}
+
+/* #memory_gameboard .memory_card.open {
     transform: rotateY(0);
     cursor: default;
 }
@@ -73,6 +106,10 @@ h1 {
 #memory_gameboard .memory_card.match {
     cursor: default;
 }
+
+.select {
+
+} */
 
 /*
  * Styles for the Score Panel
@@ -100,3 +137,7 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+
+  
+  
