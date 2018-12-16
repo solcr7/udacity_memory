@@ -1,43 +1,205 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Daily Dozen Memory</title>
     <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
 
     <div class="container">
         <header>
             <h1>Daily Dozen Memory</h1>
-            <h2>Improve your Health <br> Improve your Mind</h2>
+            <div id="memory_subtitle">Improve your Mind<br>Improve your Health</div>
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <div id="stars">
+            <ul class="stars">
+                <li class="star switch_on"><i class="fas fa-carrot"></i></li>
+                <li class="star switch_on"><i class="fas fa-carrot"></i></li>
+                <li class="star switch_on"><i class="fas fa-carrot"></i></li>
+                <li class="star switch_on"><i class="fas fa-carrot"></i></li>
+                <li class="star switch_on"><i class="fas fa-carrot"></i></li>
+            </ul>
+            </div>
 
-        	<span class="moves">3</span> Moves
+            <div id="moves">
+            <span id="display_moves">0</span> Moves
+            </div>
 
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+            <div id="counter">
+                <span id="counting_seconds">0</span> s
+            </div>
+
+            <div class="restart" onclick="newGame()">
+                <i class="fas fa-redo"></i>
+            </div>
         </section>
 
-        <div id="memory_gameboard">
-            
-             
-           
+        <div id="memory_gameboard"></div>
+    <div id="button" onclick="document.getElementById('modal_box').style.display='block'" class="modal_button">
+        <p id="button_text">Get more information</p>
+    </div>
+</div>
+<div id="information_modal">
+    
+
+    <div id="modal_box">
+        <div class="modal_content_wrapper">
+            <div class="modal_content">
+                <span id="modal_close" onclick="document.getElementById('modal_box').style.display='none'">&#10006;</span>
+
+                <div id="modal_header">Dr. Greger's Daily Dozen</div>
+                <div class="modal_titletext">Most of us might know, that eating healthy is a good idea.
+                     But what kind of food actually IS healthy? And how can we find 
+                     our way through this massive jungle of information concerning food 
+                     and nutrition? Well, thankfully there are people out there who are 
+                     creating a path that we can take.</br>
+                </div>
+                <div class="modal_titletext"> For example Dr. Michael Greger, 
+                     who has looked through hundreds of scientific studies to 
+                     filter out the relevant information we need to live a healthier 
+                     and happier life while eating delicious food. In the end he came up with 
+                    this list of a dozen foodgroups that we should eat on a daily basis to 
+                    get the maximum effect of a well balanced and healthy nutritional intake. 
+                </div>
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_bohnen.jpg" alt="picture of beans" />
+                    <div class="textblock">
+                        <div class="modal_title">Beans</div>
+                        <div class="modal_serving">Servings: 3 per day</div>
+                        <div class="modal_subtitle">chickpeas, lentils, kidneybeans, black beans, peas, butter beans,
+                            cannellini beans soyabeans, tofu etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_beeren.jpg" alt="picture of berries" />
+                    <div class="textblock">
+                        <div class="modal_title">Berries</div>
+                        <div class="modal_serving">Servings: 1 per day</div>
+                        <div class="modal_subtitle">blueberries, raspberries, strawberries, blackberries,
+                            cherries, cranberries etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_banane.jpg" alt="picture of a banana" />
+                    <div class="textblock">
+                        <div class="modal_title">Other Fruits</div>
+                        <div class="modal_serving">Servings: 3 per day</div>
+                        <div class="modal_subtitle">apples, bananas, oranges, melon, lemons, plums,
+                            pears, clementines, kiwi etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_broccoli.jpg" alt="picture of broccoli" />
+                    <div class="textblock">
+                        <div class="modal_title">Cruciferous Vegetables</div>
+                        <div class="modal_serving">Servings: 1 per day</div>
+                        <div class="modal_subtitle">broccoli, cauliflower, kale, bok choi, cabbage,
+                            brussels sprouts, horseradish etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_mangold.jpg" alt="picture of mangold" />
+                    <div class="textblock">
+                        <div class="modal_title">Greens</div>
+                        <div class="modal_serving">Servings: 2 per day</div>
+                        <div class="modal_subtitle">kale, spinach, swiss chard, spring greens,
+                            rocket, salad greens etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_tomate.jpg" alt="picture of a tomato" />
+                    <div class="textblock">
+                        <div class="modal_title">Other Vegetables</div>
+                        <div class="modal_serving">Servings: 2 per day</div>
+                        <div class="modal_subtitle">carrots, tomatoes, pumpkin, sweet potatoes, garlic,
+                            beetroot, courgettes, mushrooms, onions, etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_leinsamen.jpg" alt="picture of flaxseeds" />
+                    <div class="textblock">
+                        <div class="modal_title">Flaxseeds</div>
+                        <div class="modal_serving">Servings: 1 per day</div>
+                        <div class="modal_subtitle">one table spoon of ground up flaxseeds a day</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_walnuesse.jpg" alt="picture of nuts" />
+                    <div class="textblock">
+                        <div class="modal_title">Nuts & Seeds</div>
+                        <div class="modal_serving">Servings: 1 per day</div>
+                        <div class="modal_subtitle">walnuts, cashew, almonds, brazil nuts, sunflower seeds,
+                            pumpkin seeds, chias seeds, pistachios etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_spices.jpg" alt="picture of spices" />
+                    <div class="textblock">
+                        <div class="modal_title">Herbs & Spices</div>
+                        <div class="modal_serving">Servings: 1 per day</div>
+                        <div class="modal_subtitle">a quarter of a teaspoon of turmeric, plus any others
+                            you love: basil, cardamom, cinnamon, coriander,
+                            cumin, dill, fenugreek, ginger, garlic, majoran, mustard
+                            powder, nutmeg, oregano, smoked paprika, parsley, pepper,
+                            peppermint, rosemary, saffon, sage, thyme, vanilla etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_grains.jpg" alt="picture of whole grains" />
+                    <div class="textblock">
+                        <div class="modal_title">Whole Grains</div>
+                        <div class="modal_serving">Servings: 3 per day</div>
+                        <div class="modal_subtitle">oats, whole wheat pasta, brown rice, buckwheat,
+                            teff, millet, quinoa etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_wasser.jpg" alt="picture of a glass of water" />
+                    <div class="textblock">
+                        <div class="modal_title">Drinks</div>
+                        <div class="modal_serving">Servings: 5 per day</div>
+                        <div class="modal_subtitle">water, green tea, hibiscus tea, black tea, matcha tea,
+                            peppermint tea, coffee etc.</div>
+                    </div>
+                </div>
+
+                <div class="modal_flex">
+                    <img class="modal_image" src="images/memory_exercise.jpg" alt="picture of a running man" />
+                    <div class="textblock">
+                        <div class="modal_title">Exercise</div>
+                        <div class="modal_serving">Servings: 1 per day</div>
+                        <div class="modal_subtitle">ideally 90 minutes a day of moderate activity,
+                            such as walking</div>
+                        <p class="info_link">For more information about Dr. Michael Greger's Daily Dozen click <a href="https://nutritionfacts.org/video/dr-gregers-daily-dozen-checklist/"
+                                target="_blank">here</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+    </div>
     </div>
 
+    </div>
     <script src="game.js"></script>
 </body>
+
 </html>

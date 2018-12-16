@@ -1,18 +1,17 @@
-/*
- * Create a list that holds all of your cards
- */
-const deck = [ "memory_banane", 
-                "memory_beeren", 
-                "memory_bohnen", 
-                "memory_broccoli", 
-                "memory_exercise", 
-                "memory_grains", 
-                "memory_leinsamen", 
-                "memory_mangold", 
-                "memory_spices",
-                "memory_tomate", 
-                "memory_walnuesse", 
-                "memory_wasser", 
+/*creating a card deck */
+
+const deck = ["memory_banane",
+    "memory_beeren",
+    "memory_bohnen",
+    "memory_broccoli",
+    "memory_exercise",
+    "memory_grains",
+    "memory_leinsamen",
+    "memory_mangold",
+    "memory_spices",
+    "memory_tomate",
+    "memory_walnuesse",
+    "memory_wasser",
 ]
 
 let fullDeck = deck.concat(deck);
@@ -36,66 +35,146 @@ function shuffle(array) {
 shuffle(fullDeck);
 
 
- /* crate Gameboard */
+/*setting a timer*/
 
- function startGame() {
-    const  gameboard = document.querySelector('#memory_gameboard');
+let seconds = 0;
+function counting() {
+    seconds++;
+    document.getElementById('counting_seconds').textContent = seconds;
+}
+let timer = null;
+
+
+/* creating the Gameboard */
+
+function startGame() {
+    const gameboard = document.querySelector('#memory_gameboard');
     let newHtml = ''
 
-    for(const cardName of fullDeck) {
-         newHtml += `<div class="memory_card">
+    for (const cardName of fullDeck) {
+        newHtml += `<div class="memory_card">
          <img class="memory_card_front" src="images/${cardName}.jpg"/>
-         <img class="memory_card_back" src="images/memory_back.png"/>
+         <img class="memory_card_back" src="images/green_cup.png"/>
          </div>`
     }
-     gameboard.innerHTML = newHtml;
- }
-    
- startGame()
+    gameboard.innerHTML = newHtml;
+}
 
+startGame()
 
-/* set up the event listener for a card. If a card is clicked: */
+//create star rating
+
+let moves = 0;
+
+function starRating(number) {
+    const stars = document.getElementsByClassName('star');
+    for (let i = 0; i < stars.length; i++) {
+
+        if (i < number) {
+            stars[i].classList.add('switch_on');
+        }
+        else {
+            stars[i].classList.remove('switch_on');
+        }
+    }
+}
+
+function incrementMoves() {
+    moves++;
+
+    document.getElementById('display_moves').textContent = moves;
+
+    if (moves < 34) {
+        starRating(5);
+    }
+
+    else if (moves < 40) {
+        starRating(4);
+    }
+
+    else if (moves < 46) {
+        starRating(3);
+    }
+
+    else if (moves < 50) {
+        starRating(2);
+    }
+
+    else {
+        starRating(1);
+    }
+
+}
+
+/* flipping and matching cards */
 const eventAllCards = document.querySelectorAll('.memory_card');
-for(memory_card of eventAllCards) {
-    memory_card.addEventListener('click', function(event) {
+for (memory_card of eventAllCards) {
+    memory_card.addEventListener('click', function (event) {
+
+        if (timer == null) {
+            timer = setInterval(counting, 1000);
+        }
         const flippedCards = document.querySelectorAll('.flipped');
         const count = flippedCards.length;
         if (count < 2) {
-        this.classList.add('flipped');
+            /*adding sound */
+            const sound = new Audio('Click On-SoundBible.com-1697535117.wav');
+            sound.play();
+            incrementMoves();
+            this.classList.add('flipped');
         }
         if (count == 1) {
             const firstCard = flippedCards[0];
             const firstCardFront = firstCard.querySelector('.memory_card_front');
             const secondCardFront = this.querySelector('.memory_card_front');
-            console.log("pups", firstCardFront.src, secondCardFront.src);
+
             if (firstCardFront.src == secondCardFront.src) {
                 firstCard.classList.add('matched');
                 this.classList.add('matched');
                 firstCard.classList.remove('flipped');
                 this.classList.remove('flipped');
+//stop timer when all cards match / game is finished
+                const allCardsMatch = document.querySelectorAll('.matched');
+                if (allCardsMatch.length == 24) {
+                    clearInterval(timer);
+
+                }
             }
 
-            else { 
-                setTimeout(()=>{
+            else {
+                setTimeout(() => {
                     firstCard.classList.remove('flipped');
                     this.classList.remove('flipped');
-                },1500)
-                
+                }, 1500)
+
             }
-
-
         }
     })
 }
 
+/* restarting the game */
 
- 
- /*- display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+function newGame() {
+    clearInterval(timer);
+    timer = null;
+    seconds = 0;
+    document.getElementById('counting_seconds').textContent = seconds;
+    moves = 0;
+    document.getElementById('display_moves').textContent = moves;
+    const allCardsMatch = document.querySelectorAll('.matched');
+    for (const card of allCardsMatch) {
+        card.classList.remove('matched');
+       
+    }
+    starRating(5);
+}
+
+
+/*
+*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+*/
+
+
+
+/*Checking, if all couples have matched, returning alert with star rating, time, stopping time */
 
