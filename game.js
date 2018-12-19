@@ -142,7 +142,7 @@ for (memory_card of eventAllCards) {
                 this.classList.remove('flipped');
                 //stop timer when all cards match / game is finished
                 const allCardsMatch = document.querySelectorAll('.matched');
-                if (allCardsMatch.length == 2) {
+                if (allCardsMatch.length == 24) {
                     clearInterval(timer);
                     const alertBox = document.getElementById('alert_box_wrapper');
                     alertBox.classList.add('active');
