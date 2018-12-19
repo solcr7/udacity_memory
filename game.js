@@ -79,28 +79,35 @@ function starRating(number) {
     }
 }
 
+let activeCarrots = 5;
+
 function incrementMoves() {
     moves++;
 
     document.getElementById('display_moves').textContent = moves;
 
     if (moves < 34) {
+        activeCarrots = 5;
         starRating(5);
     }
 
     else if (moves < 40) {
+        activeCarrots = 4;
         starRating(4);
     }
 
     else if (moves < 46) {
+        activeCarrots = 3;
         starRating(3);
     }
 
     else if (moves < 50) {
+        activeCarrots = 2;
         starRating(2);
     }
 
     else {
+        activeCarrots = 1;
         starRating(1);
     }
 
@@ -133,10 +140,19 @@ for (memory_card of eventAllCards) {
                 this.classList.add('matched');
                 firstCard.classList.remove('flipped');
                 this.classList.remove('flipped');
-//stop timer when all cards match / game is finished
+                //stop timer when all cards match / game is finished
                 const allCardsMatch = document.querySelectorAll('.matched');
-                if (allCardsMatch.length == 24) {
+                if (allCardsMatch.length == 2) {
                     clearInterval(timer);
+                    const alertBox = document.getElementById('alert_box_wrapper');
+                    alertBox.classList.add('active');
+                    const alertCarrots = document.getElementById('alert_carrots');
+                    const alertSeconds = document.getElementById('alert_seconds');
+                    const alertMoves = document.getElementById('alert_moves');
+
+                    alertCarrots.textContent = activeCarrots;
+                    alertSeconds.textContent = seconds;
+                    alertMoves.textContent = moves;
 
                 }
             }
@@ -152,7 +168,9 @@ for (memory_card of eventAllCards) {
     })
 }
 
-/* restarting the game */
+
+
+/* restarting the game / creating alert box with carrot rating / time / restart*/
 
 function newGame() {
     clearInterval(timer);
@@ -164,17 +182,11 @@ function newGame() {
     const allCardsMatch = document.querySelectorAll('.matched');
     for (const card of allCardsMatch) {
         card.classList.remove('matched');
-       
+
     }
     starRating(5);
+    document.getElementById('alert_box_wrapper').classList.remove('active');
+    shuffle(fullDeck);
+
 }
-
-
-/*
-*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/
-
-
-
-/*Checking, if all couples have matched, returning alert with star rating, time, stopping time */
 

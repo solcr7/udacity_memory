@@ -121,7 +121,7 @@ h1 {
     list-style: none;
     display: inline-block;
     font-size: 22px;
-    text-shadow: 3px 3px 3px rgb(128, 112, 112);
+    text-shadow: 3px 3px 3px rgb(26, 87, 16);
     }
 
 .score-panel .restart {
@@ -130,7 +130,7 @@ h1 {
 }
 
 .score-panel .switch_on {
-    color: rgb(167, 255, 163);
+    color: rgb(255, 135, 23);
 }
 
 #moves, #counter {
@@ -215,7 +215,7 @@ h1 {
 
 }
 .modal_title {
-    font-family: 'Source Sans Pro', sans-serif;
+   font-family: 'Source Sans Pro', sans-serif;
    margin: 20px 20px 0px 0px;
    text-decoration: underline;
    font-size: 25px;
@@ -234,6 +234,13 @@ h1 {
     margin: 10px 0px 10px 20px;
     font-style: italic;
 }
+
+.info_link {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin-top: 65px;
+}
+
 #button {
     
     background: #27542A;
@@ -259,4 +266,46 @@ h1 {
     cursor: pointer;
   }
   
+#alert_box_wrapper {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 61, 73, 0.5);
+    display: none;
+}
+
+#alert_box_wrapper.active {
+    display: flex;
+}
+
+.alert_box {
+    width: 300px;
+    height: 200px;
+    background-color: #99D49D;
+    margin: 0 auto;
+    border: 7px solid rgb(224, 135, 17);
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.alert_text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#congratulations {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 22px;
+    text-decoration: underline;
+    font-weight: 900;
+}
 
