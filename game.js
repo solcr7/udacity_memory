@@ -28,12 +28,8 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
-
-shuffle(fullDeck);
-
 
 /*setting a timer*/
 
@@ -48,6 +44,7 @@ let timer = null;
 /* creating the Gameboard */
 
 function startGame() {
+    shuffle(fullDeck);
     const gameboard = document.querySelector('#memory_gameboard');
     let newHtml = ''
 
@@ -60,7 +57,7 @@ function startGame() {
     gameboard.innerHTML = newHtml;
 }
 
-startGame()
+startGame();
 
 //create star rating
 
@@ -86,22 +83,22 @@ function incrementMoves() {
 
     document.getElementById('display_moves').textContent = moves;
 
-    if (moves < 34) {
+    if (moves < 38) {
         activeCarrots = 5;
         starRating(5);
     }
 
-    else if (moves < 40) {
+    else if (moves < 44) {
         activeCarrots = 4;
         starRating(4);
     }
 
-    else if (moves < 46) {
+    else if (moves < 50) {
         activeCarrots = 3;
         starRating(3);
     }
 
-    else if (moves < 50) {
+    else if (moves < 56) {
         activeCarrots = 2;
         starRating(2);
     }
@@ -168,8 +165,6 @@ for (memory_card of eventAllCards) {
     })
 }
 
-
-
 /* restarting the game / creating alert box with carrot rating / time / restart*/
 
 function newGame() {
@@ -180,13 +175,12 @@ function newGame() {
     moves = 0;
     document.getElementById('display_moves').textContent = moves;
     const allCardsMatch = document.querySelectorAll('.matched');
+
     for (const card of allCardsMatch) {
         card.classList.remove('matched');
-
     }
     starRating(5);
     document.getElementById('alert_box_wrapper').classList.remove('active');
-    shuffle(fullDeck);
-
+    startGame();
 }
 
